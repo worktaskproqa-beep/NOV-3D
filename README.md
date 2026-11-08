@@ -60,29 +60,34 @@ NOV/
 
 ## 🚀 الرفع على GitHub ثم Vercel
 
-### ١) ما يُرفع وما لا يُرفع
+### ١) الرفع على GitHub (الطريقة الصحيحة)
 
-**ارفع فقط:**
-```
-public/   src/   .env.example   .gitignore   .nvmrc   README.md
-eslint.config.mjs   next.config.ts   package.json   package-lock.json
-postcss.config.mjs   tsconfig.json   drizzle.config.json
-```
+1. أنشئ مستودعاً **جديداً وفارغاً** على GitHub (لا تستخدم مستودعاً فيه ملفات قديمة).
+2. فكّ ضغط `NOV-vercel-ready.zip`. ستجد مجلداً اسمه `NOV`. **افتحه** فيظهر بداخله:
+   ```
+   public/  scripts/  src/  .env.example  .gitignore  .nvmrc  README.md
+   drizzle.config.json  eslint.config.mjs  next.config.ts  package.json
+   package-lock.json  postcss.config.mjs  tsconfig.json
+   ```
+3. في GitHub اضغط **Add file → Upload files**، ثم **اسحب المجلدات نفسها** (`src` و`scripts` وملفات الجذر) إلى الصفحة.
+   ⚠️ اسحب **المجلد** وليس الملفات التي بداخله، وإلا وُضعت كل الملفات في الجذر وضاعت المجلدات.
+4. اضغط **Commit**، ثم كرّر الخطوة 3 لمجلد `public` وحده (GitHub يقبل 100 ملف كحد أقصى في كل رفعة).
+5. تأكد في صفحة المستودع أن الجذر يحتوي **فقط** على الملفات المذكورة في الخطوة 2.
 
-**❌ لا ترفع أبداً:**
-| المجلد / الملف | السبب |
-|---|---|
-| `node_modules/` | ضخم جداً (مئات الآلاف من الملفات)، وVercel يثبّته بنفسه |
-| `.next/` | ناتج البناء، وVercel يبنيه بنفسه |
-| `.env` | فيه رابط قاعدة البيانات المحلية، ويكسر الموقع على Vercel |
-| `next-env.d.ts` | يُنشأ تلقائياً |
+> ملفات `.env.example` و`.gitignore` و`.nvmrc` مخفية في ويندوز وماك. فعّل «إظهار الملفات المخفية» لترفعها (اختيارية، والموقع يعمل بدونها).
+> الأسهل: [GitHub Desktop](https://desktop.github.com)، فهو يرفع المجلد كاملاً بالبنية الصحيحة.
 
-> ⚠️ **مهم:** الرفع بالسحب والإفلات في موقع GitHub **لا يقرأ** ملف `.gitignore`، فاختر الملفات بنفسك.
-> أيضاً GitHub يقبل **100 ملف كحد أقصى في كل رفعة**. ارفع على دفعتين:
-> 1. **الدفعة الأولى:** مجلد `src` مع ملفات الجذر.
-> 2. **الدفعة الثانية:** مجلد `public`.
+**❌ لا ترفع أبداً:** `node_modules/` و`.next/` و`.env`.
 
-**الأسهل:** استخدم [GitHub Desktop](https://desktop.github.com)، فهو يتجاهل الملفات الممنوعة تلقائياً بفضل `.gitignore`.
+### فحص تلقائي قبل كل بناء
+
+عند كل بناء، محلياً أو على Vercel، يعمل `scripts/check-imports.mjs` تلقائياً ويتأكد من:
+- أن كل `import` يطابق ملفاً حقيقياً **بنفس حالة الأحرف تماماً** (Vercel يعمل على Linux، و`ProductTile` ≠ `productTile`).
+- وجود مجلدات الصور والخطوط في أماكنها.
+- عدم وجود مجلد `app/` زائد في الجذر.
+
+إذا كان هناك خطأ، يظهر تقرير واضح يذكر الملف الناقص أو الاسم الصحيح، بدل عشرات أخطاء `Module not found`.
+لتشغيله يدوياً: `node scripts/check-imports.mjs`
 
 ### ٢) النشر على Vercel
 
@@ -108,7 +113,10 @@ postcss.config.mjs   tsconfig.json   drizzle.config.json
 | الخطأ على Vercel | الحل |
 |---|---|
 | `No Next.js version detected` | `package.json` ليس في جذر المستودع. انقل الملفات للجذر، أو حدّد **Root Directory** للمجلد الصحيح. |
-| `Module not found` | ملف ناقص أثناء الرفع، غالباً من `src` أو `public`. قارن الملفات مع الهيكل أعلاه. |
+| `Module not found: ../../public/images/…` | مجلد `public` لم يُرفع. ارفعه كاملاً (الخطوة 4). |
+| `Can't resolve './fonts/…'` | مجلد `src/app/fonts` لم يُرفع. |
+| `Pre-flight check failed` | اقرأ التقرير فوق الخطأ في سجل Vercel: يذكر الملف الناقص أو الاسم الصحيح بالحرف. |
+| ملفات مثل `Header.tsx` في جذر المستودع | سُحبت الملفات بدل المجلدات. احذفها من الجذر (لا تكسر البناء، لكنها فوضى). |
 | `ECONNREFUSED 127.0.0.1:5432` | رفعت ملف `.env`. احذفه من GitHub، أو احذف `DATABASE_URL` من إعدادات Vercel. |
 | الطلبات لا تُحفظ / خطأ في الدفع | لم تُضف قاعدة بيانات. اتبع الخطوة ٣. |
 
