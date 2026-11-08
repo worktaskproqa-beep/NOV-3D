@@ -1,0 +1,45 @@
+{
+  "hero": {
+    "eyebrow": "Collection 01",
+    "titleA": "Go in peace,",
+    "titleB": "move in trust.",
+    "body": "Relaxed hoodies with the NOV skyline embroidery, in four colours — and a cap to match.",
+    "cta": "Shop hoodies",
+    "secondary": "Shop caps",
+    "front": "Front",
+    "back": "Back",
+    "view": "Side",
+    "colour": "Colour",
+    "shopColour": "Shop {colour}",
+    "showcase": "Hoodie viewer",
+    "drag": "Drag to turn the hoodie",
+    "product": "Skyline Hoodie"
+  },
+  "details": {
+    "eyebrow": "The details",
+    "title": "Look closer.",
+    "items": {
+      "emb": {
+        "t": "Skyline embroidery",
+        "d": "Towers, Tower Bridge and Big Ben across the back, with NOV beneath."
+      },
+      "sleeve": {
+        "t": "Words on the sleeve",
+        "d": "Go in peace, Move in trust, Act in faith."
+      },
+      "qr": {
+        "t": "QR code at the cuff",
+        "d": "A small code near the cuff, in the same cream tone as the embroidery."
+      }
+    }
+  },
+  "shopAll": {
+    "eyebrow": "The collection",
+    "title": "Shop all"
+  },
+  "newsletter": {
+    "eyebrow": "Stay in the loop",
+    "title": "First to the next drop.",
+    "body": "New colours and limited drops — you'll hear first. No spam."
+  }
+}

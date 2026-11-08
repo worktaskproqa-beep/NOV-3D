@@ -1,0 +1,58 @@
+{
+  "shopTitle": "Shop",
+  "shopIntro": "The Skyline Hoodie in four colours, and the cap to go with it.",
+  "filter": "Filter by category",
+  "results": {
+    "one": "1 item",
+    "other": "{count} items"
+  },
+  "empty": "Nothing here yet.",
+  "color": "Colour",
+  "size": "Size",
+  "quantity": "Quantity",
+  "addToBag": "Add to bag",
+  "added": "Added to bag",
+  "selectSize": "Please choose a size",
+  "careText": "Wash cold, inside out. Lay flat to dry. Do not tumble dry.",
+  "shippingNote": "Delivery across Qatar in 2–4 working days. Free returns within 14 days.",
+  "related": "You may also like",
+  "breadcrumb": "Breadcrumb",
+  "oneSize": "One size",
+  "notFound": "We couldn't find this product.",
+  "shots": {
+    "front": "front",
+    "back": "back",
+    "man": "worn, front",
+    "rear": "worn, back",
+    "woman": "styled",
+    "walk": "on the street",
+    "emb": "skyline embroidery",
+    "sleeve": "sleeve lettering",
+    "qr": "QR code",
+    "fabric": "fabric and cuff"
+  },
+  "colorways": "Colours",
+  "sort": {
+    "label": "Sort by",
+    "featured": "Recommended",
+    "priceAsc": "Price: low to high",
+    "priceDesc": "Price: high to low"
+  },
+  "filterColor": "Colour",
+  "clear": "Clear",
+  "quickAdd": "Quick add",
+  "sizeGuide": "Size guide",
+  "colours": {
+    "one": "1 colour",
+    "other": "{count} colours"
+  },
+  "completeLook": "Complete the look",
+  "gallery": "Product photos",
+  "thumb": "Show photo {n}",
+  "acc": {
+    "details": "Details",
+    "materialCare": "Fabric & care",
+    "shipping": "Delivery & returns"
+  },
+  "embroideryNote": "Skyline embroidery on chest and back"
+}
