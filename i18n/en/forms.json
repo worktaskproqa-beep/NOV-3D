@@ -1,0 +1,24 @@
+{
+  "email": "Email",
+  "emailPlaceholder": "you@example.com",
+  "subscribe": "Subscribe",
+  "subscribing": "Subscribing…",
+  "subscribed": "You're in! We'll let you know when something new drops.",
+  "already": "You're already subscribed — thanks!",
+  "fullName": "Full name",
+  "phone": "Phone number",
+  "city": "City",
+  "address": "Delivery address",
+  "notes": "Order notes (optional)",
+  "name": "Your name",
+  "message": "Message",
+  "send": "Send message",
+  "sending": "Sending…",
+  "sent": "Thanks — we'll get back to you soon.",
+  "errors": {
+    "required": "This field is required.",
+    "email": "Please enter a valid email.",
+    "phone": "Please enter a valid phone number.",
+    "generic": "Something went wrong. Please try again."
+  }
+}

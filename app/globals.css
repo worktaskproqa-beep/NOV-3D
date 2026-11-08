@@ -1,0 +1,267 @@
+@import "tailwindcss";
+
+/* Day / night: driven by data-theme on <html> (set before paint by the boot script) */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ==========================================================================
+   NOV DESIGN TOKENS
+   Palette derived from the NOV brand mockup: ivory/parchment grounds,
+   wine + espresso accents, warm brown-family neutrals, sparing bronze.
+   Contrast (on --color-ivory #FAF7F2): ink 15.9:1 · wine 11.6:1 · muted 5.9:1
+   ========================================================================== */
+@theme {
+  /* NOV v2 — "Night & Bone": bone grounds, near-black type, burgundy accent (the hero hoodie colour) */
+  --color-ivory: #f2efea;
+  --color-linen: #e9e5df;
+  --color-parchment: #dfdad2;
+  --color-sand: #cfc8be;
+  --color-taupe: #bdb5aa;
+  --color-stone: #8f877d;
+  --color-muted: #5f5850;
+  --color-ink: #0e0d0c;
+  --color-espresso: #161413;
+  --color-wine: #6e1f2c;
+  --color-wine-deep: #4a1520;
+  --color-wine-soft: #8a2a3a;
+  --color-bronze: #a8a097;
+  --color-error: #b3261e;
+  --color-success: #3f6b3a;
+  --color-hero: #ebe8e3;
+
+  --font-display: var(--font-archivo), "Archivo", system-ui, sans-serif;
+  --font-serif: var(--font-archivo), "Archivo", system-ui, sans-serif;
+  --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
+  --font-ar-display: var(--font-alexandria), "Alexandria", system-ui, sans-serif;
+  --font-ar-body: var(--font-plex-ar), "IBM Plex Sans Arabic", system-ui, sans-serif;
+
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --breakpoint-xs: 22rem;
+}
+
+:root {
+  /* 4px spacing scale */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px;
+  --space-8: 32px; --space-10: 40px; --space-12: 48px; --space-16: 64px; --space-20: 80px;
+  --space-24: 96px; --space-30: 120px; --space-40: 160px;
+  --section-y: clamp(80px, 12vw, 160px);
+  --gutter: clamp(20px, 4vw, 56px);
+  --max-wide: 1520px;
+  --max-text: 920px;
+  --header-h: 68px;
+  color-scheme: light;
+}
+
+/* ---------- Night palette: same token names, so every component switches automatically ---------- */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --color-ivory: #121110;
+  --color-linen: #1b1917;
+  --color-parchment: #2a2724;
+  --color-sand: #3a3530;
+  --color-taupe: #4d4741;
+  --color-stone: #8d857b;
+  --color-muted: #b2aa9f;
+  --color-ink: #f2efea;
+  --color-espresso: #24201d;
+  --color-wine: #e2788a;
+  --color-wine-deep: #c75a6d;
+  --color-wine-soft: #f0a0ad;
+  --color-bronze: #8d857b;
+  --color-error: #f2857a;
+  --color-success: #8fbf86;
+  --color-hero: #171513;
+}
+/* Sections designed as dark bands (announcement, details, footer) keep the day palette so they stay dark at night */
+html[data-theme="dark"] .on-dark {
+  --color-ivory: #f2efea; --color-linen: #e9e5df; --color-parchment: #dfdad2; --color-sand: #cfc8be; --color-taupe: #bdb5aa;
+  --color-stone: #8f877d; --color-muted: #5f5850; --color-ink: #0b0a09; --color-espresso: #1d1a18;
+  --color-wine: #8a2a3a; --color-wine-deep: #6e1f2c; --color-wine-soft: #e2788a; --color-bronze: #a8a097;
+}
+html[data-theme="dark"] .on-dark.border-y, html[data-theme="dark"] footer.on-dark { border-color: rgba(242,239,234,.08); }
+/* smooth palette swap (not on first paint) */
+html.theme-anim, html.theme-anim body, html.theme-anim header, html.theme-anim section, html.theme-anim footer, html.theme-anim article, html.theme-anim a, html.theme-anim button {
+  transition: background-color 350ms ease, color 350ms ease, border-color 350ms ease !important;
+}
+
+/* ---------- Base ---------- */
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--header-h) + 16px); }
+body {
+  background: var(--color-ivory);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+html[lang="ar"] body { font-family: var(--font-ar-body); line-height: 1.85; }
+::selection { background: var(--color-wine); color: var(--color-ivory); }
+img, svg, video { display: block; max-width: 100%; }
+button { cursor: pointer; }
+
+/* Paper grain — barely perceptible tactile warmth */
+.grain::after {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 100; opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .17 0 0 0 0 .1 0 0 0 0 .06 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Focus — visible, on-brand, accessible */
+:focus-visible { outline: 2px solid var(--color-wine); outline-offset: 3px; border-radius: 2px; }
+.on-dark :focus-visible, .on-dark:focus-visible { outline-color: var(--color-parchment); }
+
+.skip-link {
+  position: absolute; inset-inline-start: 16px; top: -100px; z-index: 200;
+  background: var(--color-wine); color: var(--color-ivory); padding: 12px 20px;
+  transition: top 160ms var(--ease-out-strong);
+}
+.skip-link:focus { top: 12px; }
+
+/* ---------- Layout ---------- */
+.container-wide { width: 100%; max-width: var(--max-wide); margin-inline: auto; padding-inline: var(--gutter); }
+.container-text { width: 100%; max-width: var(--max-text); margin-inline: auto; padding-inline: var(--gutter); }
+.section { padding-block: var(--section-y); }
+.hairline { border-color: color-mix(in srgb, var(--color-taupe) 70%, transparent); }
+
+/* ---------- Typography scale (Archivo display / Inter text) ---------- */
+.t-display { font-family: var(--font-display); font-weight: 800; font-size: clamp(3.25rem, 11.5vw, 11.5rem); line-height: 0.86; letter-spacing: -0.04em; text-transform: uppercase; }
+.t-h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.4rem, 6.2vw, 5.75rem); line-height: 0.92; letter-spacing: -0.03em; text-transform: uppercase; }
+.t-h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.9rem, 4.2vw, 3.75rem); line-height: 0.95; letter-spacing: -0.025em; text-transform: uppercase; }
+.t-h3 { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.125rem, 1.6vw, 1.5rem); line-height: 1.2; letter-spacing: -0.01em; }
+.t-h4 { font-family: var(--font-sans); font-weight: 600; font-size: 0.8125rem; line-height: 1.4; letter-spacing: 0.06em; text-transform: uppercase; }
+.t-lead { font-size: clamp(1.0625rem, 1.3vw, 1.1875rem); line-height: 1.65; color: var(--color-muted); }
+.t-body { font-size: 0.9375rem; line-height: 1.7; }
+.t-small { font-size: 0.8125rem; line-height: 1.55; color: var(--color-muted); }
+.t-label { font-family: var(--font-sans); font-weight: 600; font-size: 0.6875rem; line-height: 1.3; letter-spacing: 0.16em; text-transform: uppercase; }
+.t-quote { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 5vw, 4.5rem); line-height: 0.98; letter-spacing: -0.03em; text-transform: uppercase; }
+
+/* ---------- Arabic typography — NO letter-spacing, taller leading, no uppercase ---------- */
+html[lang="ar"] *, html[lang="ar"] *::before, html[lang="ar"] *::after { letter-spacing: 0 !important; }
+html[lang="ar"] .t-display { font-family: var(--font-ar-display); font-weight: 700; font-size: clamp(2.75rem, 9vw, 8.5rem); line-height: 1.2; text-transform: none; }
+html[lang="ar"] .t-h1 { font-family: var(--font-ar-display); font-weight: 700; font-size: clamp(2.125rem, 5vw, 4.5rem); line-height: 1.3; text-transform: none; }
+html[lang="ar"] .t-h2 { font-family: var(--font-ar-display); font-weight: 700; font-size: clamp(1.75rem, 3.6vw, 3rem); line-height: 1.35; text-transform: none; }
+html[lang="ar"] .t-h3 { font-family: var(--font-ar-display); font-weight: 500; font-size: clamp(1.125rem, 1.6vw, 1.4rem); line-height: 1.55; }
+html[lang="ar"] .t-h4, html[lang="ar"] .t-label { font-family: var(--font-ar-body); text-transform: none; font-size: 0.875rem; font-weight: 600; line-height: 1.6; }
+html[lang="ar"] .t-lead { font-size: clamp(1.125rem, 1.4vw, 1.25rem); line-height: 1.9; }
+html[lang="ar"] .t-body { font-size: 1rem; line-height: 1.9; }
+html[lang="ar"] .t-small { font-size: 0.875rem; line-height: 1.8; }
+html[lang="ar"] .t-quote { font-family: var(--font-ar-display); font-weight: 700; font-size: clamp(1.75rem, 4vw, 3.5rem); line-height: 1.4; text-transform: none; }
+html[lang="ar"] .font-serif, html[lang="ar"] .font-display { font-family: var(--font-ar-display); }
+/* The NOV wordmark is a brand mark: always Latin serif, never mirrored */
+.wordmark { display: inline-block; direction: ltr; unicode-bidi: isolate; line-height: 0; }
+.ltr-nums { direction: ltr; unicode-bidi: isolate; display: inline-block; }
+
+/* Directional icons mirror in RTL */
+html[dir="rtl"] .flip-rtl { transform: scaleX(-1); }
+
+/* ---------- Buttons (square, high-contrast) ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 52px;
+  padding: 14px 30px; font-family: var(--font-sans); font-weight: 600; font-size: 0.75rem;
+  letter-spacing: 0.14em; text-transform: uppercase; border: 1px solid transparent; border-radius: 0;
+  transition: background-color 220ms var(--ease-out-strong), color 220ms var(--ease-out-strong), border-color 220ms var(--ease-out-strong), transform 140ms var(--ease-out-strong);
+  white-space: nowrap;
+}
+html[lang="ar"] .btn { font-family: var(--font-ar-body); text-transform: none; font-size: 0.9375rem; }
+.btn:active { transform: scale(0.97); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-primary { background: var(--color-ink); color: var(--color-ivory); }
+.btn-primary:hover { background: var(--color-wine); }
+.btn-outline { border-color: var(--color-ink); color: var(--color-ink); background: transparent; }
+.btn-outline:hover { background: var(--color-ink); color: var(--color-ivory); }
+.btn-ghost-light { border-color: color-mix(in srgb, var(--color-ivory) 60%, transparent); color: var(--color-ivory); }
+.btn-ghost-light:hover { background: var(--color-ivory); color: var(--color-ink); border-color: var(--color-ivory); }
+.btn-light { background: var(--color-ivory); color: var(--color-ink); }
+.btn-light:hover { background: var(--color-wine); color: var(--color-ivory); }
+.link-underline { background: linear-gradient(currentColor, currentColor) no-repeat; background-size: 0% 1px; background-position: 100% 100%; transition: background-size 300ms var(--ease-out-strong); padding-bottom: 2px; }
+html[dir="rtl"] .link-underline { background-position: 0% 100%; }
+.link-underline:hover, .link-underline[aria-current="page"] { background-size: 100% 1px; background-position: 0% 100%; }
+html[dir="rtl"] .link-underline:hover, html[dir="rtl"] .link-underline[aria-current="page"] { background-position: 100% 100%; }
+
+/* ---------- Store tile: soft panel tinted with the product colour + studio spotlight ---------- */
+.tile {
+  background:
+    radial-gradient(62% 52% at 50% 58%, rgba(255, 255, 255, 0.62), transparent 72%),
+    color-mix(in srgb, var(--tint, #6e1f2c) 9%, #ebe7e1);
+}
+html[data-theme="dark"] .tile {
+  background:
+    radial-gradient(62% 52% at 50% 58%, rgba(255, 255, 255, 0.1), transparent 72%),
+    color-mix(in srgb, var(--tint, #6e1f2c) 18%, #2b2825);
+}
+
+/* ---------- Form fields ---------- */
+.field-label { display: block; margin-bottom: 8px; }
+.field {
+  width: 100%; min-height: 50px; padding: 12px 16px; background: var(--color-ivory);
+  border: 1px solid var(--color-taupe); border-radius: 1px; color: var(--color-ink); font: inherit;
+  transition: border-color 200ms var(--ease-out-strong), box-shadow 200ms var(--ease-out-strong);
+  text-align: start;
+}
+.field::placeholder { color: var(--color-stone); }
+.field:hover { border-color: var(--color-stone); }
+.field:focus { outline: none; border-color: var(--color-wine); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-wine) 15%, transparent); }
+.field[aria-invalid="true"] { border-color: var(--color-error); }
+.field-error { margin-top: 6px; color: var(--color-error); font-size: 0.8125rem; }
+input[type="email"].field, input[type="tel"].field { direction: ltr; }
+html[dir="rtl"] input[type="email"].field, html[dir="rtl"] input[type="tel"].field { text-align: end; }
+
+/* ---------- Motion: scroll reveal (content visible without JS) ---------- */
+.js [data-reveal] { opacity: 0; transform: translate3d(0, 28px, 0); transition: opacity 1000ms var(--ease-editorial), transform 1100ms var(--ease-editorial); transition-delay: var(--d, 0ms); }
+.js [data-reveal="fade"] { transform: none; }
+.js [data-reveal="scale"] { transform: scale(1.06); opacity: 0; }
+.js [data-reveal].is-in { opacity: 1; transform: none; }
+
+/* Masked line reveal — inspired by React Bits MaskedHeading, implemented natively */
+.line-mask { display: block; overflow: hidden; padding-block: 0.06em; margin-block: -0.06em; }
+.line-mask > span { display: block; }
+.js .lines .line-mask > span { transform: translate3d(0, 110%, 0); transition: transform 1100ms var(--ease-editorial); transition-delay: calc(var(--i, 0) * 110ms + var(--d, 0ms)); }
+.js .lines.is-in .line-mask > span { transform: none; }
+
+/* Image curtain reveal */
+.js .curtain { clip-path: inset(0 0 100% 0); transition: clip-path 1300ms var(--ease-in-out-strong); transition-delay: var(--d, 0ms); }
+.js .curtain.is-in { clip-path: inset(0 0 0 0); }
+
+/* Intro wordmark */
+@keyframes nov-intro-out { 0%, 55% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
+@keyframes nov-intro-mark { 0% { opacity: 0; transform: translateY(14px); letter-spacing: 0.3em; } 60% { opacity: 1; transform: none; letter-spacing: 0.08em; } 100% { opacity: 1; letter-spacing: 0.08em; } }
+.intro-veil { animation: nov-intro-out 1600ms var(--ease-out-strong) forwards; pointer-events: none; }
+.no-intro .intro-veil, html:not(.js) .intro-veil { display: none; }
+.intro-veil .wordmark { animation: nov-intro-mark 1100ms var(--ease-editorial) forwards; }
+
+@keyframes nov-hero-zoom { from { transform: scale(1.12); } to { transform: scale(1); } }
+.hero-zoom { animation: nov-hero-zoom 2400ms var(--ease-editorial) both; }
+@keyframes nov-scroll-cue { 0% { transform: scaleY(0); transform-origin: top; } 45% { transform: scaleY(1); transform-origin: top; } 55% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+.scroll-cue { animation: nov-scroll-cue 2200ms var(--ease-in-out-strong) infinite; }
+
+@keyframes nov-marquee { to { transform: translate3d(-50%, 0, 0); } }
+html[dir="rtl"] .marquee-track { animation-direction: reverse; }
+.marquee-track { animation: nov-marquee 40s linear infinite; }
+
+.drawer-enter { animation: nov-drawer 320ms var(--ease-out-strong); }
+@keyframes nov-drawer { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+
+/* Hero skyline: line-art draws itself on load */
+@keyframes nov-draw { to { stroke-dashoffset: 0; } }
+.js .sky-draw path, .js .sky-draw line, .js .sky-draw rect, .js .sky-draw circle, .js .sky-draw polyline { stroke-dasharray: 1; stroke-dashoffset: 1; animation: nov-draw 2600ms var(--ease-in-out-strong) forwards; animation-delay: calc(var(--k, 0) * 70ms + 300ms); }
+@keyframes nov-glow { 0%, 100% { opacity: .35; } 50% { opacity: .9; } }
+.sky-light { animation: nov-glow 3.8s ease-in-out infinite; animation-delay: var(--k, 0s); }
+
+/* ---------- Reduced motion: everything visible, nothing moves ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; transition-delay: 0ms !important; scroll-behavior: auto !important; }
+  .js [data-reveal], .js .lines .line-mask > span { opacity: 1 !important; transform: none !important; }
+  .js .curtain { clip-path: none !important; }
+  .intro-veil { display: none; }
+  .hero-zoom, .marquee-track, .scroll-cue { animation: none !important; }
+  [data-parallax] { transform: none !important; }
+  .js .sky-draw * { stroke-dashoffset: 0 !important; animation: none !important; }
+  .sky-light { animation: none !important; }
+}
+
+/* Arabic has no true italic — never synthesize a slant (it clips and distorts letterforms) */
+html[lang="ar"] .italic, html[lang="ar"] em { font-style: normal; }
+html[lang="ar"] .line-mask { padding-inline: 0.08em; margin-inline: -0.08em; }

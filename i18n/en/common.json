@@ -1,0 +1,138 @@
+{
+  "announcements": [
+    "Free delivery across Qatar on orders over QAR 400",
+    "Pay on delivery — cash or card",
+    "Free returns within 14 days"
+  ],
+  "tagline": "Go in peace. Move in trust. Act in faith.",
+  "skip": "Skip to content",
+  "nav": {
+    "home": "Home",
+    "shop": "Shop",
+    "about": "About",
+    "contact": "Contact",
+    "cart": "Bag",
+    "menu": "Menu",
+    "close": "Close menu",
+    "primary": "Main menu",
+    "search": "Search",
+    "hoodies": "Hoodies",
+    "caps": "Caps"
+  },
+  "lang": {
+    "label": "Language",
+    "en": "EN",
+    "ar": "عربي"
+  },
+  "categories": {
+    "all": "All",
+    "hoodies": "Hoodies",
+    "caps": "Caps"
+  },
+  "actions": {
+    "shopNow": "Shop now",
+    "viewAll": "View all",
+    "view": "View",
+    "backToShop": "Back to shop",
+    "continue": "Continue shopping"
+  },
+  "placeholder": "Photo coming soon",
+  "footer": {
+    "intro": "Relaxed hoodies and caps with the NOV skyline embroidery — four colours, made for every day.",
+    "shop": "Shop",
+    "house": "NOV",
+    "care": "Help",
+    "story": "About NOV",
+    "craft": "The details",
+    "contact": "Contact us",
+    "shipping": "Delivery & returns",
+    "faq": "FAQ",
+    "sizeGuide": "Size guide",
+    "follow": "Follow us",
+    "address": "Doha, Qatar",
+    "email": "hello@nov.qa",
+    "phone": "+974 4000 0000",
+    "rights": "All rights reserved.",
+    "privacy": "Privacy",
+    "terms": "Terms"
+  },
+  "logoAlt": "NOV — home",
+  "about": {
+    "eyebrow": "About NOV",
+    "title": "A hoodie with a message.",
+    "lead": "NOV started with one idea: everyday pieces that carry a meaning, not just a logo.",
+    "p1": "Every Skyline Hoodie carries the same three lines down the sleeve — Go in peace, Move in trust, Act in faith. A reminder you wear every day.",
+    "p2": "On the back, a detailed skyline of towers, Tower Bridge and Big Ben, with NOV beneath it; on the chest, a smaller version of the same design. Four colours, one signature.",
+    "valuesTitle": "What NOV stands for",
+    "values": [
+      {
+        "t": "A design with meaning",
+        "d": "The sleeve line is part of every piece — words to carry with you."
+      },
+      {
+        "t": "Details that count",
+        "d": "Skyline embroidery, sleeve lettering and a QR code at the cuff."
+      },
+      {
+        "t": "Everyday comfort",
+        "d": "A relaxed fit in soft, heavyweight fabric, made to be worn daily."
+      }
+    ],
+    "cta": "Shop the collection",
+    "imageAlt": "The back of the black NOV hoodie with the skyline embroidery"
+  },
+  "contact": {
+    "eyebrow": "Help",
+    "title": "How can we help?",
+    "lead": "Questions about sizes, your order or delivery? Send us a message and we'll get back to you.",
+    "shippingTitle": "Delivery & returns",
+    "shippingBody": "We deliver across Qatar in 2–4 working days. Delivery is free on orders over QAR 400, otherwise QAR 25. Unworn pieces can be returned within 14 days.",
+    "faqTitle": "FAQ",
+    "faq": [
+      {
+        "q": "How does the hoodie fit?",
+        "a": "The Skyline Hoodie has a relaxed fit. If you prefer it closer to the body, go one size down."
+      },
+      {
+        "q": "How do I wash it?",
+        "a": "Wash cold and inside out, then lay flat to dry — the embroidery and fabric stay looking new."
+      },
+      {
+        "q": "How do I pay?",
+        "a": "You pay on delivery, in cash or by card."
+      },
+      {
+        "q": "Can I change my order?",
+        "a": "Yes — contact us within 12 hours of placing it."
+      }
+    ],
+    "sizeTitle": "Size guide",
+    "sizeBody": "Chest (cm): XS 96 · S 102 · M 108 · L 114 · XL 120.",
+    "hours": "Saturday – Thursday, 10:00 – 19:00"
+  },
+  "trust": {
+    "shipping": {
+      "t": "Free delivery",
+      "d": "Across Qatar on orders over QAR 400"
+    },
+    "returns": {
+      "t": "14-day returns",
+      "d": "Unworn pieces, returned for free"
+    },
+    "cod": {
+      "t": "Pay on delivery",
+      "d": "Cash or card at your door"
+    },
+    "embroidered": {
+      "t": "Signature design",
+      "d": "Skyline embroidery on chest and back"
+    }
+  },
+  "theme": {
+    "day": "Day",
+    "night": "Night",
+    "toDark": "Switch to night mode",
+    "toLight": "Switch to day mode",
+    "label": "Appearance"
+  }
+}
